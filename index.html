@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#203d38">
+<title>LoveGoBuy spreadsheet: Finds, Größen und QC im Vergleich</title>
+<meta name="description" content="LoveGoBuy spreadsheet verständlich erklärt: Mode nach Kategorien entdecken, Größen vergleichen, QC-Fotos prüfen und die Gesamtkosten vor dem Kauf einordnen.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="de_DE">
+<meta property="og:title" content="LoveGoBuy spreadsheet – mit Plan zu passenden Finds">
+<meta property="og:description" content="Ein unabhängiger Leitfaden für Kategorien, Passform, Produktlinks und QC-Fotos.">
+<meta name="twitter:card" content="summary">
+<style>
+:root{color-scheme:light;--paper:#f6f3eb;--ink:#213831;--muted:#52665e;--line:#d9ddd2;--white:#fffefb;--accent:#d9ef80}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+a{color:inherit;text-underline-offset:4px}
+a:focus-visible,summary:focus-visible{outline:3px solid #a4532a;outline-offset:5px}
+a:hover{text-decoration:underline}
+img{display:block;max-width:100%;height:auto}
+header,main,footer{width:min(1180px,calc(100% - 40px));margin:auto}
+header{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:25px 0;border-bottom:1px solid var(--line)}
+.logo{font-size:21px;font-weight:850;letter-spacing:-1px;text-decoration:none}
+.label{font-size:12px;letter-spacing:1.8px;text-transform:uppercase;font-weight:750}
+.muted{color:var(--muted)}
+.categories{padding:23px 0 28px}
+.categories p{margin:0 0 12px}
+.category-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.category-grid a{background:var(--white);border:1px solid var(--line);padding:11px 13px;text-decoration:none;font-size:13px;font-weight:650}
+.category-grid a:hover{background:var(--accent)}
+.hero{display:grid;grid-template-columns:1.1fr 1fr;overflow:hidden;border-radius:4px;background:var(--ink);color:var(--paper)}
+.hero-copy{padding:45px 38px;align-self:center}
+.hero .muted{color:#c6d5cc}
+h1{font-size:clamp(35px,4.4vw,61px);line-height:1.06;letter-spacing:-2px;margin:18px 0 23px;font-weight:760}
+h1 span{display:block;color:var(--accent)}
+.hero figure{margin:0;background:#e9ebe8;display:flex;flex-direction:column;justify-content:center}
+.hero img{width:100%;aspect-ratio:1/1;object-fit:contain}
+.hero figcaption{background:#e9ebe8;color:var(--muted);padding:10px 18px;font-size:12px}
+.button{display:inline-block;padding:12px 19px;background:var(--accent);color:var(--ink);font-weight:750;text-decoration:none;margin-top:15px;border-radius:2px}
+.intro{max-width:850px;margin:35px 0}
+.section{padding:38px 0;border-top:1px solid var(--line)}
+h2{font-size:clamp(27px,3vw,38px);letter-spacing:-1px;line-height:1.2;margin:9px 0 20px}
+h3{font-size:20px;line-height:1.3;margin:12px 0}
+p{margin:0 0 16px}
+.section-heading{display:flex;justify-content:space-between;align-items:end;gap:25px}
+.section-heading p{max-width:450px}
+.lookbook{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.lookbook figure{margin:0}
+.lookbook .picture{background:var(--white);border:1px solid var(--line);overflow:hidden}
+.lookbook img{width:100%;aspect-ratio:4/5;object-fit:contain}
+.lookbook figcaption{font-size:14px;padding-top:13px}
+.lookbook strong{display:block;font-size:17px}
+.note{font-size:13px;color:var(--muted);margin-top:17px}
+.columns{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+.article{padding:25px;background:var(--white);border:1px solid var(--line)}
+.number{font-size:12px;letter-spacing:2px;color:var(--muted)}
+ul,ol{padding-left:22px}
+li{margin:9px 0}
+.table-scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px;background:var(--white)}
+caption{text-align:left;font-weight:700;padding:0 0 12px}
+th,td{text-align:left;padding:16px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:#e9eee4}
+td:first-child{font-weight:700;min-width:150px}
+.callout{background:var(--accent);padding:24px 28px;margin-top:25px}
+.topics{display:grid;grid-template-columns:repeat(3,1fr);gap:23px}
+.topics article{border-top:3px solid var(--ink);padding-top:15px}
+.faq{max-width:900px}
+details{border-bottom:1px solid var(--line);padding:18px 0}
+summary{font-weight:750;cursor:pointer;font-size:17px}
+details p{margin:13px 0 0;color:var(--muted)}
+.research{font-size:13px;color:var(--muted)}
+.research summary{font-size:14px}
+.research ul{columns:2;column-gap:35px}
+.final-cta{padding:35px;background:var(--ink);color:var(--paper);display:flex;justify-content:space-between;align-items:center;gap:24px;margin-bottom:35px}
+.final-cta h2{margin:0 0 10px}
+.final-cta p{margin:0;color:#c6d5cc}
+footer{padding:25px 0 35px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);display:flex;justify-content:space-between;gap:25px}
+footer p{max-width:760px}
+@media(min-width:800px){
+.section{content-visibility:auto;contain-intrinsic-size:auto 550px}
+}
+@media(max-width:850px){
+.category-grid{grid-template-columns:repeat(3,1fr)}
+.hero{grid-template-columns:1fr 1fr}
+.hero-copy{padding:28px 23px}
+.lookbook{grid-template-columns:repeat(2,1fr)}
+.topics{grid-template-columns:1fr}
+.section-heading{display:block}
+}
+@media(max-width:600px){
+header,main,footer{width:calc(100% - 28px)}
+header{align-items:start}
+.header-note{max-width:125px;font-size:11px;text-align:right}
+.category-grid{grid-template-columns:repeat(2,1fr)}
+.hero{display:flex;flex-direction:column}
+.hero-copy{padding:30px 24px}
+.hero img{aspect-ratio:4/3;max-height:340px}
+.columns{grid-template-columns:1fr;gap:16px}
+.section{padding:29px 0}
+.lookbook{gap:12px}
+.final-cta,footer{display:block}
+.research ul{columns:1}
+.final-cta{padding:25px}
+.button{font-size:14px}
+h1{letter-spacing:-1.5px}
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "name": "LoveGoBuy spreadsheet – mit Plan zu passenden Finds",
+      "inLanguage": "de",
+      "description": "Unabhängiger deutschsprachiger Leitfaden zu Produktlisten, Größenvergleich und QC-Fotos."
+    },
+    {
+      "@type": "Article",
+      "headline": "LoveGoBuy spreadsheet sinnvoll nutzen: vom Fund zur prüfbaren Auswahl",
+      "inLanguage": "de",
+      "description": "Produktquellen dokumentieren, Maße vergleichen und offene Fragen vor einer Bestellung klären.",
+      "author": {
+        "@type": "Organization",
+        "name": "HipobuyFind – Redaktion dieser Seite"
+      },
+      "about": [
+        {"@type": "Thing", "name": "LoveGoBuy spreadsheet"},
+        {"@type": "Thing", "name": "Größentabellen"},
+        {"@type": "Thing", "name": "QC-Fotos"}
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "inLanguage": "de",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Was ist ein LoveGoBuy spreadsheet?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Der Begriff bezeichnet eine Übersicht von Produktfunden, häufig mit Kategorien, Quellenlinks, Größenangaben und QC-Hinweisen. Die Liste dient der Recherche; verbindlich sind die Angaben im aktuellen Angebot."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Ist diese Seite eine offizielle LoveGoBuy-Website?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nein. Diese Seite ist ein unabhängiger redaktioneller Leitfaden. Die Katalogverweise führen zu HipobuyFind; eine offizielle Verbindung zu LoveGoBuy oder den gezeigten Marken wird nicht behauptet."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Wie finde ich die passende Größe?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Vergleiche die Maßtabelle des konkreten Angebots mit einem gut passenden eigenen Kleidungsstück. Bei Schuhen sind die angegebene Fußlänge und die Messmethode entscheidend. Eine EU-Größe allein reicht nicht."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Was zeigen QC-Fotos und was nicht?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "QC-Fotos können sichtbare Fehler, Farbe, Etiketten und angeforderte Maße zeigen. Sie belegen weder automatisch die Echtheit noch Tragekomfort oder langfristige Haltbarkeit."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Ist der Listenpreis der Endpreis?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nein. Je nach Angebot können Inlandsversand, Servicegebühren, internationaler Versand, Steuern und Abgaben hinzukommen. Prüfe jede Position sowie die Währung vor der Zahlung."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Funktionieren alle Produktlinks mit jedem Agenten?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Das ist nicht garantiert. Prüfe die ursprüngliche Produktquelle, die konkrete Variante und die aktuell unterstützten Marktplätze beim gewünschten Dienst. Diese Seite bietet keine automatische Linkkonvertierung."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+<link rel="canonical" href="https://kakobuyfinds.github.io/cfihp/">
+</head>
+<body>
+<header>
+  <a class="logo" href="https://www.hipobuyfind.com">hipobuyfind.com</a>
+  <span class="header-note label">Finds verstehen.<br>Bewusster auswählen.</span>
+</header>
+
+<main>
+  <nav class="categories" aria-label="Produktkategorien">
+    <p class="label">Direkt zur Kategorie · Katalog bei HipobuyFind</p>
+    <div class="category-grid">
+      <a href="https://hipobuyfind.com/category-911-Shoes.html">Shoes ↗</a>
+      <a href="https://hipobuyfind.com/category-912-Hoodies%2FSweaters.html">Hoodies/Sweaters ↗</a>
+      <a href="https://hipobuyfind.com/category-913-T-Shirts.html">T-Shirts ↗</a>
+      <a href="https://hipobuyfind.com/category-914-Jackets.html">Jackets ↗</a>
+      <a href="https://hipobuyfind.com/category-915-Pants%2FShorts.html">Pants/Shorts ↗</a>
+      <a href="https://hipobuyfind.com/category-916-Headwear.html">Headwear ↗</a>
+      <a href="https://hipobuyfind.com/category-917-Sets.html">Sets ↗</a>
+      <a href="https://hipobuyfind.com/category-918-underwear%2Funderpants.html">Underwear/underpants ↗</a>
+      <a href="https://hipobuyfind.com/category-919-Jersey.html">Jersey ↗</a>
+      <a href="https://hipobuyfind.com/category-920-Accessories.html">Accessories ↗</a>
+    </div>
+  </nav>
+
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-copy">
+      <p class="label">Der unabhängige Einkaufsleitfaden</p>
+      <h1 id="hero-title">LoveGoBuy spreadsheet<span>Erst vergleichen.<br>Dann entscheiden.</span></h1>
+      <p class="muted">Ein guter Fund beginnt mit mehr als einem schönen Foto. Ordne Produktlinks, prüfe die Passform und halte fest, was du vor einer Bestellung noch wissen musst.</p>
+      <a class="button" href="https://www.hipobuyfind.com">Finds bei HipobuyFind entdecken ↗</a>
+    </div>
+    <figure>
+      <img src="https://static.nike.com/a/images/t_PDP_864_v1,f_auto,q_auto:eco/918bc0dd-0a43-47f7-a0dd-b46a27d8679d/air-force-1-low-retro-camo-mens-shoes-3MLKyzIf.png" alt="Nike Air Force 1 Low Retro Camo als Sneaker-Modell zur visuellen Orientierung" width="864" height="864" loading="eager" fetchpriority="high" decoding="async">
+      <figcaption>Nike Air Force 1 · Bildreferenz zur Form, kein konkretes Verkaufsangebot.</figcaption>
+    </figure>
+  </section>
+
+  <div class="intro">
+    <p><strong>Was ist ein LoveGoBuy spreadsheet?</strong> Der Begriff bezeichnet eine Übersicht von Produktfunden, häufig mit Kategorien, Quellenlinks, Größenangaben und QC-Hinweisen. Die Liste dient der Recherche; verbindlich sind die Angaben im aktuellen Angebot.</p>
+    <p class="muted">Hier findest du einen deutschsprachigen Leitfaden statt einer herunterladbaren Produkttabelle. Die Kategorien öffnen den Katalog von HipobuyFind. Diese Seite ist unabhängig und behauptet keine offizielle Verbindung zu LoveGoBuy oder den gezeigten Marken.</p>
+  </div>
+
+  <section class="section" aria-labelledby="inspiration">
+    <div class="section-heading">
+      <div>
+        <p class="label">Form · Material · Proportion</p>
+        <h2 id="inspiration">Ein Look, vier Blickwinkel.</h2>
+      </div>
+      <p class="muted">Nutze Markenbilder als visuelle Referenzen. Vergleiche anschließend das konkrete Angebot mit seinen eigenen Detailfotos.</p>
+    </div>
+    <div class="lookbook">
+      <figure>
+        <div class="picture">
+          <img src="https://jp.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-embossed-monogram-zip-up-jacket--FUVI01387900_PM1_Worn%20view.png?hei=600&amp;wid=480" alt="Model mit schwarzer Louis Vuitton Monogramm-Jacke und passender Kappe" width="480" height="600" loading="lazy" decoding="async">
+        </div>
+        <figcaption><strong>Louis Vuitton · Silhouette</strong>Bei Jacken Schulterbreite und Länge zusammen betrachten.</figcaption>
+      </figure>
+      <figure>
+        <div class="picture">
+          <img src="https://media.gucci.com/style/HEXFBFBFB_South_0_160_640x640/1751298339/838745_3HBC4_2600_001_100_0000_Light.jpg" alt="Beigefarbene Gucci GG-Baseballkappe mit braunen Details" width="640" height="640" loading="lazy" decoding="async">
+        </div>
+        <figcaption><strong>Gucci · Kopfbedeckung</strong>Umfang, Schirmform und Verstellbarkeit getrennt prüfen.</figcaption>
+      </figure>
+      <figure>
+        <div class="picture">
+          <img src="https://assets.hermes.com/is/image/hermesproduct/bracelet-clic-h--700001F%204P-front-1-300-0-1000-1000_b.jpg" alt="Hermès Clic H Armreif mit Emaille und H-förmigem Verschluss" width="1000" height="1000" loading="lazy" decoding="async">
+        </div>
+        <figcaption><strong>Hermès · Schmuckdetail</strong>Innenumfang, Verschluss und Materialangaben vergleichen.</figcaption>
+      </figure>
+      <figure>
+        <div class="picture">
+          <img src="https://assets.christiandior.com/is/image/diorprod/LOOK_H_25_3_LOOK_014_E08?crop=568%2C0%2C1864%2C2000&amp;hei=600&amp;qlt=75&amp;wid=480" alt="Model mit blauem Dior Oblique Kurzarmhemd und schwarzer Hose" width="480" height="600" loading="lazy" decoding="async">
+        </div>
+        <figcaption><strong>Dior · Stoff und Schnitt</strong>Musterverlauf und Bewegungsweite anhand mehrerer Ansichten beurteilen.</figcaption>
+      </figure>
+    </div>
+    <p class="note">Redaktionelle Bildreferenzen: Nike, Louis Vuitton, Gucci, Hermès und Dior. Sie bestätigen weder die Verfügbarkeit bei HipobuyFind noch die Echtheit dort gelisteter Artikel.</p>
+  </section>
+
+  <section class="section" aria-labelledby="workflow">
+    <p class="label">Vom Fund zur prüfbaren Auswahl</p>
+    <h2 id="workflow">Zwei Listen reichen: passend und noch offen.</h2>
+    <div class="columns">
+      <article class="article">
+        <span class="number">01 / LOVEGOBUY FINDS</span>
+        <h3>Produktlinks sinnvoll ordnen</h3>
+        <p>Lege für jeden Fund einen eigenen Eintrag an. Ein LoveGoBuy Finds Guide ist besonders hilfreich, wenn du ähnliche Artikel anhand derselben Angaben vergleichst.</p>
+        <ul>
+          <li><strong>Quelle:</strong> Originalangebot, Verkäufer und Artikelbezeichnung notieren.</li>
+          <li><strong>Variante:</strong> Farbe, Größe und gewählte Ausführung festhalten.</li>
+          <li><strong>Prüfdatum:</strong> Verfügbarkeit bei erneutem Öffnen kontrollieren.</li>
+        </ul>
+        <p>Für LoveGoBuy Produktlinks gilt: Ein Vorschaubild allein identifiziert die gewählte Variante nicht zuverlässig.</p>
+      </article>
+      <article class="article">
+        <span class="number">02 / LOVEGOBUY QC GUIDE</span>
+        <h3>Offene Fragen vor dem Kauf klären</h3>
+        <p>Trenne Verkäuferfotos von auftragsbezogenen QC-Fotos. Letztere sind nur dann aussagekräftig, wenn sie dem richtigen Artikel und der richtigen Variante zugeordnet sind.</p>
+        <ul>
+          <li><strong>Passform:</strong> Maßtabelle mit eigenen Referenzmaßen abgleichen.</li>
+          <li><strong>Details:</strong> Nähte, Verschlüsse und sichtbare Schäden prüfen.</li>
+          <li><strong>Rückgabe:</strong> Bedingungen und geltende Frist beim Anbieter nachlesen.</li>
+        </ul>
+        <p>Ein LoveGoBuy Größenratgeber sollte die Messmethode erklären, statt pauschal eine Größe größer zu empfehlen.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="comparison">
+    <p class="label">Die praktische Vergleichsgrundlage</p>
+    <h2 id="comparison">Was du je Kategorie prüfen solltest</h2>
+    <div class="table-scroll">
+      <table>
+        <caption>Auswahlkriterien für deine persönliche Vergleichsliste</caption>
+        <thead>
+          <tr>
+            <th scope="col">Kategorie</th>
+            <th scope="col">Wichtige Angaben</th>
+            <th scope="col">Sinnvolle Rückfrage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Sneaker und Schuhe</td>
+            <td>Fußlänge, Größentabelle, Weite, Sohle</td>
+            <td>Bezieht sich das Maß auf den Fuß oder die Innensohle?</td>
+          </tr>
+          <tr>
+            <td>Hoodies und T-Shirts</td>
+            <td>Brustweite, Schulterbreite, Rückenlänge, Stoff</td>
+            <td>Wurde flach liegend und ohne Dehnen gemessen?</td>
+          </tr>
+          <tr>
+            <td>Jacken und Sets</td>
+            <td>Ärmellänge, Futter, Verschlüsse, Maße je Teil</td>
+            <td>Sind Oberteil und Hose einzeln beschrieben?</td>
+          </tr>
+          <tr>
+            <td>Hosen und Shorts</td>
+            <td>Bundweite, Leibhöhe, Innenbeinlänge</td>
+            <td>Ist der Bund elastisch und wie wurde er gemessen?</td>
+          </tr>
+          <tr>
+            <td>Kappen und Kopfbedeckung</td>
+            <td>Kopfumfang, Tiefe, Verschluss</td>
+            <td>Welchen Umfang deckt die Verstellung ab?</td>
+          </tr>
+          <tr>
+            <td>Schmuck und Accessoires</td>
+            <td>Material, Innenumfang, Gewicht, Verschluss</td>
+            <td>Gibt es genaue Materialangaben und Detailaufnahmen?</td>
+          </tr>
+          <tr>
+            <td>Trikots und Unterwäsche</td>
+            <td>Schnitt, Material, Pflege, Rückgabebedingungen</td>
+            <td>Gelten besondere Einschränkungen bei Rückgaben?</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout">
+      <strong>Gesamtkosten statt Einzelpreis vergleichen.</strong>
+      <p>Artikelpreis + möglicher Inlandsversand + Servicegebühren + internationaler Versand + gegebenenfalls Steuern und Abgaben. Prüfe die Währung, das Zielland und die tatsächlich enthaltenen Leistungen, bevor du zahlst.</p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="articles">
+    <p class="label">Kurze Themenartikel</p>
+    <h2 id="articles">Drei Entscheidungen, die den Unterschied machen</h2>
+    <div class="topics">
+      <article>
+        <h3>Größe: messen statt raten</h3>
+        <p>Vergleiche die Maße eines gut sitzenden Kleidungsstücks mit dem Angebot. Notiere die Brustweite flach liegend und verwechsle sie nicht mit dem Körperumfang. Für eine LoveGoBuy Größentabelle bei Hoodies sind außerdem Rückenlänge und Schulterbreite hilfreich.</p>
+        <p class="muted">Bei Sneakern zuerst die Fußlänge bestimmen und die Messhinweise des Modells beachten. EU-Größen verschiedener Anbieter sind kein verlässlicher Ersatz für diese Prüfung.</p>
+      </article>
+      <article>
+        <h3>QC: aus Fotos Fragen ableiten</h3>
+        <p>Betrachte zunächst die Gesamtansicht, danach Nähte, Etiketten und Verschlüsse. Für einen LoveGoBuy QC-Foto-Vergleich müssen Blickwinkel und Variante möglichst übereinstimmen. Licht kann Farben verändern.</p>
+        <p class="muted">Eine Nahaufnahme kann einen sichtbaren Fehler dokumentieren. Sie beweist weder Echtheit noch langfristige Haltbarkeit. Fehlende Informationen gehören als offene Frage in deine Liste.</p>
+      </article>
+      <article>
+        <h3>Versand: den Kontext mitdenken</h3>
+        <p>Ein LoveGoBuy Versandkostenvergleich braucht mehr als das Produktgewicht: Verpackungsmaße, Zielort und gewählte Route können eine Rolle spielen. Frage nach, ob tatsächliches Gewicht oder Volumengewicht zugrunde liegt.</p>
+        <p class="muted">Übernimm keine pauschale Lieferzeit aus einer fremden Liste. Prüfe die aktuellen Angaben des Dienstes und halte Rückgabefristen getrennt von Versandprognosen fest.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section faq" aria-labelledby="faq">
+    <p class="label">Direkte Antworten</p>
+    <h2 id="faq">Häufige Fragen</h2>
+    <details open>
+      <summary>Was ist ein LoveGoBuy spreadsheet?</summary>
+      <p>Der Begriff bezeichnet eine Übersicht von Produktfunden, häufig mit Kategorien, Quellenlinks, Größenangaben und QC-Hinweisen. Die Liste dient der Recherche; verbindlich sind die Angaben im aktuellen Angebot.</p>
+    </details>
+    <details>
+      <summary>Ist diese Seite eine offizielle LoveGoBuy-Website?</summary>
+      <p>Nein. Diese Seite ist ein unabhängiger redaktioneller Leitfaden. Die Katalogverweise führen zu HipobuyFind; eine offizielle Verbindung zu LoveGoBuy oder den gezeigten Marken wird nicht behauptet.</p>
+    </details>
+    <details>
+      <summary>Wie finde ich die passende Größe?</summary>
+      <p>Vergleiche die Maßtabelle des konkreten Angebots mit einem gut passenden eigenen Kleidungsstück. Bei Schuhen sind die angegebene Fußlänge und die Messmethode entscheidend. Eine EU-Größe allein reicht nicht.</p>
+    </details>
+    <details>
+      <summary>Was zeigen QC-Fotos und was nicht?</summary>
+      <p>QC-Fotos können sichtbare Fehler, Farbe, Etiketten und angeforderte Maße zeigen. Sie belegen weder automatisch die Echtheit noch Tragekomfort oder langfristige Haltbarkeit.</p>
+    </details>
+    <details>
+      <summary>Ist der Listenpreis der Endpreis?</summary>
+      <p>Nein. Je nach Angebot können Inlandsversand, Servicegebühren, internationaler Versand, Steuern und Abgaben hinzukommen. Prüfe jede Position sowie die Währung vor der Zahlung.</p>
+    </details>
+    <details>
+      <summary>Funktionieren alle Produktlinks mit jedem Agenten?</summary>
+      <p>Das ist nicht garantiert. Prüfe die ursprüngliche Produktquelle, die konkrete Variante und die aktuell unterstützten Marktplätze beim gewünschten Dienst. Diese Seite bietet keine automatische Linkkonvertierung.</p>
+    </details>
+  </section>
+
+  <section class="section research" aria-label="Redaktionelle Recherche">
+    <details>
+      <summary>Recherchegrundlage und Themenauswahl</summary>
+      <p>Die Bing-Ergebnisseite war beim Abruf nicht zugänglich; eine Prüfung ihrer ersten zehn Platzierungen war deshalb nicht möglich. Ergänzend wurden zehn unterschiedliche Websites aus einer verfügbaren Websuche thematisch ausgewertet. Fremde Zahlen, Qualitätsversprechen und Konditionen wurden nicht als eigene Aussagen übernommen.</p>
+      <ul>
+        <li>rep.tools – Produktquellen, Listen und Varianten.</li>
+        <li>lovegobuy.cc – Kategorien und Einkaufsablauf.</li>
+        <li>sheetslovegobuy.com – Gruppierung und Vergleichsnotizen.</li>
+        <li>spreadsheetlovegobuy.com – Kategorien und QC-Themen.</li>
+        <li>lovego.org – Bestellübersicht und Versandvorbereitung.</li>
+        <li>lovego-buy.courses – strukturierte Vergleichsfelder.</li>
+        <li>lovegobuywithqc.com – Trennung von Recherche und Bestellung.</li>
+        <li>lovego-buy.quest – Einsteigerfragen und Produktlinks.</li>
+        <li>lovegobuy.org – Suchabsicht und Detailvergleich.</li>
+        <li>lovegobuyus.buzz – Varianten, Größen und Notizen.</li>
+      </ul>
+      <p>Inhaltliche Schwerpunkte: LoveGoBuy Finds Guide, LoveGoBuy Produktlinks, LoveGoBuy QC Guide und LoveGoBuy Größenratgeber. Die Artikel behandeln dazu konkrete Suchfragen rund um Sneaker-Größen, Hoodie-Brustweite, T-Shirt-Länge, Jackenfutter, Hosenbund, Shorts-Innenbeinlänge, Kappenumfang, Trikot-Schnitt, Set-Maße, Schmuckmaterial, Armband-Innenumfang, Verschlüsse, Originalquellen, Varianten, Verkäuferfotos, QC-Zuordnung, Farbvergleich, Nahtkontrolle, Rückgabefristen, Verfügbarkeit, Währung, Gesamtkosten, Inlandsversand, Paketmaße und Volumengewicht.</p>
+    </details>
+  </section>
+
+  <aside class="final-cta">
+    <div>
+      <h2>Deine nächste Auswahl beginnt hier.</h2>
+      <p>Kategorie öffnen, Details vergleichen, Fragen festhalten.</p>
+    </div>
+    <a class="button" href="https://www.hipobuyfind.com">Zum Katalog ↗</a>
+  </aside>
+</main>
+
+<footer>
+  <a class="logo" href="https://www.hipobuyfind.com">hipobuyfind.com</a>
+  <p>Unabhängiger Einkaufsleitfaden. Markennamen dienen der Beschreibung und visuellen Orientierung. Maßgeblich für Produktmerkmale, Verfügbarkeit und Konditionen ist das jeweilige aktuelle Angebot.</p>
+</footer>
+</body>
+</html>
